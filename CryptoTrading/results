@@ -1,0 +1,71 @@
+1:
+Train Score: 19.93 RMSE
+Test Score: 483.86 RMSE
+layer=1
+units = 50
+timesteps= 30
+epochs= 100
+batch_size = 1
+No. of date row = 500
+///////////////////////////////////////////
+2:
+Train Score:15.39  RMSE
+Test Score:1803.36  RMSE
+layer=4
+units = 50
+timesteps= 30
+epochs= 250
+batch_size = 1
+No. of date row = 500
+///////////////////////////////////////////
+3:
+Train Score: 15.55  RMSE
+Test Score: 5240.17   RMSE
+layer=1
+units = 50
+timesteps= 30
+epochs= 250
+batch_size = 1
+No. of date row = 500
+/////////////////////////////////////////////
+4:
+Train Score: 20.36  RMSE
+Test Score: 700.34   RMSE
+layer=1
+units = 32
+timesteps= 30
+epochs= 120
+batch_size = 1
+No. of date row = 500
+/////////////////////////////////////////////
+5:
+Train Score: 16.52  RMSE
+Test Score: 250.05   RMSE
+layer=1
+units = 32
+timesteps= 15
+epochs= 120
+batch_size = 1
+No. of date row = 500
+/////////////////////////////////////////////
+6:
+Train Score: 16.29  RMSE
+Test Score: 175.56   RMSE
+layer=1
+units = 32
+timesteps= 5
+epochs= 120
+batch_size = 1
+No. of date row = 500
+/////////////////////////////////////////////////
+7:
+Train Score: 0.04  RMSE
+Test Score: 0.02   RMSE
+layer=1
+units = 32
+timesteps= 5
+epochs= 120
+batch_size = 1
+No. of date row = 1000
+lookback =5
+////////////////////////////////////////////////

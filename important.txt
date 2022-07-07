@@ -1,0 +1,15 @@
+Reset pycharm key
+/Users/dani/Library/Application Support/JetBrains/PyCharm2020.1/eval
+@@@
+To upgrade python to new version, must download new file from python site and remove previous version of python (idle, launcher , …) then install it normally.
+
+@@@
+
+Site packages:
+Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages
+
+@@@@@@@@@
+
+If any error in transferring folder:
+Use this:
+pip3 install --force-reinstall matplotlib

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <title>Contact us</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Contact us</h1>-->
+
+<!--    {% if myform.error %}-->
+<!--        <p style="color: red;">-->
+<!--            Please correct the error{{ myform.errors|pluralize }} below.-->
+<!--        </p>-->
+<!--    {% endif %}-->
+
+<!--    <form action="" method="post">-->
+<!--        <table>-->
+<!--            {{ myform.as_table }}-->
+<!--        </table>-->
+<!--        <input type="submit" value="Submit">-->
+<!--    </form>-->
+<!--</body>-->
+{% block content %} <!--content yek esm hast ke az base.html migirad.-->
+<h1>{{current_date}}</h1>
+<form action="add" method="post" >
+    {% csrf_token %}
+    first num : <input type="number" name="num1">
+    second num : <input type="number" name="num2">
+    <input type="submit">
+</form>
+{% endblock %}
+
+<!--</html>-->

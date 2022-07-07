@@ -1,0 +1,503 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Elements</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+	<!-- CSS here -->
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+	<link rel="stylesheet" href="{% static 'elements_table/css/datatable.css' %}">
+</head>
+
+<body>
+	<!-- Preloader Start -->
+	<div id="preloader-active">
+		<div class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+					<img src="{% static 'assets/img/logo/logo.png' %}" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Preloader Start -->
+	<header>
+		<!-- Header Start -->
+		<div class="header-area header-transparrent ">
+			<div class="main-header header-sticky">
+				<div class="container">
+					<div class="row align-items-center">
+						<!-- Logo -->
+						<div class="col-xl-2 col-lg-2 col-md-1">
+							<div class="logo">
+								<a href="index.html">
+									<img src="{% static 'assets/img/logo/logo.png' %}" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="col-xl-8 col-lg-8 col-md-8">
+							<!-- Main-menu -->
+							<div class="main-menu f-right d-none d-lg-block">
+								<nav>
+									<ul id="navigation">
+										<li><a href="{% url 'index' %}"> Home</a>
+										</li>
+										<li><a href="{% url 'about' %}">About Us</a>
+										</li>
+										<li><a href="{% url 'services' %}">Services</a>
+										</li>
+										<li><a href="{% url 'contact' %}">Contact</a>
+										</li>
+										<li><a href="#">Blog</a>
+											<ul class="submenu">
+												<li><a href="{% url 'blog' %}">Blog</a>
+												</li>
+												<li><a href="{% url 'singleblog' %}">Blog Details</a>
+												</li>
+											</ul>
+										</li>
+										<li><a href="#">Pages</a>
+											<ul class="submenu">
+												<li><a href="{% url 'elements' %}">Element</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="col-xl-2 col-lg-2 col-md-3">
+							<div class="header-right-btn f-right d-none d-lg-block"> <a href="#" class="btn header-btn">Contact Us</a>
+							</div>
+						</div>
+						<!-- Mobile Menu -->
+						<div class="col-12">
+							<div class="mobile_menu d-block d-lg-none"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Slider Area Start-->
+	<div class="section-top-border">
+		<div class="container">
+			<!-- Section-tittle -->
+			<div class="row d-flex justify-content-center">
+                <h2>Ouer Element​</h2>
+			</div>
+		</div>
+	</div>
+	<div class="section-paddingr">
+		<div class="row">
+			<div class="container">
+				<h2>Data Info.</h2>
+				<p>All Data You've Entered:</p>{# format table grid @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#}
+				<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+				<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{#
+#}
+				<div class="container">
+					<div class="table-wrapper">
+						<div class="table-title">
+							<div class="row">
+								<div class="col-sm-8">
+									<h2><b>All Passwords</b></h2>
+								</div>
+								<div class="col-sm-4">
+									<div class="search-box"> <i class="material-icons">&#xE8B6;</i>
+										<input type="text" class="form-control" placeholder="Search&hellip;">
+									</div>
+								</div>
+							</div>
+						</div>
+						<table class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>User Name <i class="fa fa-sort"></i></th>
+									<th>Password</th>
+									<th>Service Name <i class="fa fa-sort"></i></th>
+									<th>Description/Comments</th>
+									<th>Security Level <i class="fa fa-sort"></i></th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+                              {% for i, j, k in passentry %} {#peymayesh memberhaye dict passentry//k=index all_pass array#}
+								<tr>
+									<td>{{ j }}</td>
+									<td>{{ i.user_name }}</td>
+									<td>
+										<input type="password" value={{ k }} id="id{{ j }}" readonly style="width: 120px">
+										<input type="text" id="idd" hidden value="www">
+									</td>
+									<td style="width: auto">{{ i.service_name }}</td>
+									<td style="width: 80px">{{ i.desc_comm }}</td> <span class="star0" style="color: hotpink">★</span>
+									<td style="width: 90px">
+
+									</td>
+									<td style="width: 150px">
+                                        <a href="#" class="view" onmousedown="mouseDown{{ j }}()" onmouseup="mouseUp{{ j }}()" id="inputid{{ j }}" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                        <script>
+											{#show password--mousedown/up#}
+                                            document.addEventListener("contextmenu", function(e){ {# disable right click #}
+                                            e.preventDefault();}, false);
+                                            function mouseDown{{ j }}() {
+                                                var x =document.getElementById("id{{ j }}");
+                                                x.type = "text";}
+                                            function mouseUp{{ j }}() {
+                                                var x =document.getElementById("id{{ j }}");
+                                                x.type = "password";}
+										</script>
+                                        <a href="#" class="copy" onclick=copyFunction{{ j }}() title="Copy" data-toggle="tooltip"><i class="material-icons" style= "color: green">&#xe14d;</i></a>
+										<script>
+											function copyFunction{{ j }}() {
+											               var copyText = document.getElementById("id{{ j }}");
+											               copyText.type = "text";
+											               copyText.select();
+											               copyText.setSelectionRange(0, 99999);
+											               document.execCommand("copy");
+											               alert("Copied the text: " + copyText.value);
+											               copyText.type = "password";}
+										</script>
+
+										<a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+									</td>
+								</tr>
+                              {% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+ <div id="theModal" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          {% include "editpass.html" %}
+      </div>
+    </div>
+  </div>
+<button id="buttmodal" type="button" class="btn btn-danger" data-toggle="modal" data-target="#theModal">open modal</button>
+<!--formURL is appended to the modal--id & page name of model -->
+<script type="text/javascript">
+$(document).ready(function() {$("#buttmodal").modalForm({formURL: "{% url 'editpass' %}"});});
+</script>
+<!--///////////////////////////////////////////////////////////////////////////////////////////////-->
+					<div class="clearfix">
+						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link">1</a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link">2</a>
+							</li>
+							<li class="page-item active"><a href="#" class="page-link">3</a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link">4</a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link">5</a>
+							</li>
+							<li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>{# end of format table gird ###################################################################}
+			<!-- Start Button -->
+			<section class="button-area">
+				<div class="container box_1170 border-top-generic">
+					<h3 class="text-heading">Sample Buttons</h3>
+					<div class="button-group-area"> <a href="#" class="genric-btn default">Default</a>
+						<a href="#" class="genric-btn primary">Primary</a>
+						<a href="#" class="genric-btn success">Success</a>
+						<a href="#" class="genric-btn info">Info</a>
+						<a href="#" class="genric-btn warning">Warning</a>
+						<a href="#" class="genric-btn danger">Danger</a>
+						<a href="#" class="genric-btn link">Link</a>
+					</div>
+					<div class="button-group-area mt-10"> <a href="#" class="genric-btn default-border circle">Default</a>
+						<a href="#" class="genric-btn primary-border circle">Primary</a>
+						<a href="#" class="genric-btn success-border circle">Success</a>
+						<a href="#" class="genric-btn info-border circle">Info</a>
+						<a href="#" class="genric-btn warning-border circle">Warning</a>
+						<a href="#" class="genric-btn danger-border circle">Danger</a>
+						<a href="#" class="genric-btn link-border circle">Link</a>
+					</div>
+				</div>
+			</section>
+			<!-- End Button -->
+			<!-- Start Align Area -->
+			<div class="whole-wrap">
+				<div class="container box_1170">
+					<div class="section-top-border">
+						<h3 class="mb-30">Left Aligned</h3>
+						<div class="row">
+							<div class="col-md-3">
+								<img src="{% static 'assets/img/elements/d.jpg' %}" alt="" class="img-fluid">
+							</div>
+							<div class="col-md-9 mt-sm-20">
+								<p>Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks such as Party Gaming and PlayTech left the United States. Overnight, online casino players found themselves being chased by the Federal government. But, after a fortnight, the online casino industry came up with a solution and new online casinos started taking root. These began to operate under a different business umbrella, and by doing that, rendered the transfer of money to and from them legal. A major part of this was enlisting electronic banking systems that would accept this new clarification and start doing business with me. Listed in this article are the electronic banking systems that accept players from the United States that wish to play in online casinos.</p>
+							</div>
+						</div>
+					</div>
+					<div class="section-top-border text-right">
+						<h3 class="mb-30">Right Aligned</h3>
+						<div class="row">
+							<div class="col-md-9">
+								<p class="text-right">Over time, even the most sophisticated, memory packed computer can begin to run slow if we don’t do something to prevent it. The reason why has less to do with how computers are made and how they age and more to do with the way we use them. You see, all of the daily tasks that we do on our PC from running programs to downloading and deleting software can make our computer sluggish. To keep this from happening, you need to understand the reasons why your PC is getting slower and do something to keep your PC running at its best. You can do this through regular maintenance and PC performance optimization programs</p>
+								<p class="text-right">Before we discuss all of the things that could be affecting your PC’s performance, let’s talk a little about what symptoms</p>
+							</div>
+							<div class="col-md-3">
+								<img src="{% static 'assets/img/elements/d.jpg' %}" alt="" class="img-fluid">
+							</div>
+						</div>
+					</div>
+					<div class="section-top-border">
+						<h3 class="mb-30">Definition</h3>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="single-defination">
+									<h4 class="mb-20">Definition 01</h4>
+									<p>Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="single-defination">
+									<h4 class="mb-20">Definition 02</h4>
+									<p>Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="single-defination">
+									<h4 class="mb-20">Definition 03</h4>
+									<p>Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="section-top-border">
+						<h3 class="mb-30">Block Quotes</h3>
+						<div class="row">
+							<div class="col-lg-12">
+								<blockquote class="generic-blockquote">“Recently, the US Federal government banned online casinos from operating in America by making it illegal to transfer money to them through any US bank or payment system. As a result of this law, most of the popular online casino networks such as Party Gaming and PlayTech left the United States. Overnight, online casino players found themselves being chased by the Federal government. But, after a fortnight, the online casino industry came up with a solution and new online casinos started taking root. These began to operate under a different business umbrella, and by doing that, rendered the transfer of money to and from them legal. A major part of this was enlisting electronic banking systems that would accept this new clarification and start doing business with me. Listed in this article are the electronic banking”</blockquote>
+							</div>
+						</div>
+					</div>
+					<div class="section-top-border">
+						<h3>Image Gallery</h3>
+						<div class="row gallery-item">
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g1.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g1.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g2.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g2.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g3.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g3.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-6">
+								<a href="{% static 'assets/img/elements/g4.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g4.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-6">
+								<a href="{% static 'assets/img/elements/g5.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g5.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g6.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g6.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g7.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g7.jpg' %});"></div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a href="{% static 'assets/img/elements/g8.jpg' %}" class="img-pop-up">
+									<div class="single-gallery-image" style="background: url({% static 'assets/img/elements/g8.jpg' %});"></div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Align Area -->
+		<footer>
+			<!-- Footer Start-->
+			<div class="footer-main" data-background="{% static 'assets/img/shape/footer_bg.png' %}">
+				<div class="footer-area footer-padding">
+					<div class="container">
+						<div class="row d-flex justify-content-between">
+							<div class="col-lg-3 col-md-4 col-sm-8">
+								<div class="single-footer-caption mb-50">
+									<div class="single-footer-caption mb-30">
+										<!-- logo -->
+										<div class="footer-logo">
+											<a href="index.html">
+												<img src="{% static 'assets/img/logo/logo2_footer.png' %}" alt="">
+											</a>
+										</div>
+										<div class="footer-tittle">
+											<div class="footer-pera">
+												<p class="info1">221B Baker Street, P.O Box 353 Park
+													<br>Road, USA - 215431</p>
+												<p class="info2">info@yourdomain.com</p>
+											</div>
+										</div>
+										<div class="footer-social"> <a href="#"><i class="fab fa-facebook-f"></i></a>
+											<a href="#"><i class="fab fa-twitter"></i></a>
+											<a href="#"><i class="fas fa-globe"></i></a>
+											<a href="#"><i class="fab fa-behance"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 col-sm-5">
+								<div class="single-footer-caption mb-50">
+									<div class="footer-tittle">
+										<h4>Quick Links</h4>
+										<ul>
+											<li><a href="{% url 'about' %}">About</a>
+											</li>
+											<li><a href="{% url 'about' %}">Features</a>
+											</li>
+											<li><a href="{% url 'singleblog' %}">Pricing</a>
+											</li>
+											<li><a href="{% url 'blog' %}">Blog</a>
+											</li>
+											<li><a href="{% url 'contact' %}">Contact</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-4 col-sm-7">
+								<div class="single-footer-caption mb-50">
+									<div class="footer-tittle">
+										<h4>Support</h4>
+										<ul>
+											<li><a href="#">Privacy Policy</a>
+											</li>
+											<li><a href="#">Terms & Conditions</a>
+											</li>
+											<li><a href="#"> Sitemap</a>
+											</li>
+											<li><a href="#">FAQs</a>
+											</li>
+											<li><a href="#">Report a bugb</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-4 col-sm-5">
+								<div class="single-footer-caption mb-50">
+									<div class="footer-tittle">
+										<h4>Core Features</h4>
+										<ul>
+											<li><a href="#">Email Marketing</a>
+											</li>
+											<li><a href="#"> Offline SEO</a>
+											</li>
+											<li><a href="#">Social Media Marketing</a>
+											</li>
+											<li><a href="#">Lead Generation</a>
+											</li>
+											<li><a href="#"> 24/7 Support</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- footer-bottom aera -->
+				<div class="footer-bottom-area footer-bg">
+					<div class="container">
+						<div class="footer-border">
+							<div class="row d-flex align-items-center">
+								<div class="col-xl-12 ">
+									<div class="footer-copy-right text-center">
+										<p>
+											<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->Copyright &copy;
+											<script>
+												document.write(new Date().getFullYear());
+											</script>All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+											<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footer End-->
+		</footer>
+		<!-- JS here -->{# show lable in table #}
+		<script src="{% static 'elements_table/js/datatable_showlable.js' %}"></script>
+		<!-- All JS Custom Plugins Link Here here -->
+		<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+        <script src="{% static 'elements_table/js/jqmodalajax.js' %}"></script>
+        <script src="{% static 'elements_table/js/jqmodalajax2.js' %}"></script>
+		<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+		<script src="{% static './assets/js/popper.min.js' %}"></script>
+		<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+		<!-- Jquery Mobile Menu -->
+		<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+		<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+		<script src="{% static './assets/js/slick.min.js' %}"></script>
+		<!-- Date Picker -->
+		<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+		<!-- One Page, Animated-HeadLin -->
+		<script src="{% static './assets/js/wow.min.js' %}"></script>
+		<script src="{% static './assets/js/animated.headline.js' %}"></script>
+		<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+		<!-- Scrollup, nice-select, sticky -->
+		<script src="{% static './assets/js/jquery.scrollUp.min.js' %}"></script>
+		<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+		<!-- contact js -->
+		<script src="{% static './assets/js/contact.js' %}"></script>
+		<script src="{% static './assets/js/jquery.form.js' %}"></script>
+		<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+		<script src="{% static './assets/js/mail-script.js' %}"></script>
+		<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+		<!-- Jquery Plugins, main Jquery -->
+		<script src="{% static './assets/js/plugins.js' %}"></script>
+		<script src="{% static './assets/js/main.js' %}"></script>
+	</div>
+</body>
+
+</html>

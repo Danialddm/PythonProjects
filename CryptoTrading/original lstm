@@ -1,0 +1,147 @@
+import os
+import time
+import tensorflow as tf
+import math
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Dropout
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+start_time = time.process_time()  # processor time
+# convert an array of values into a dataset matrix
+def create_dataset(dataset, look_back=1):
+    dataX, dataY = [], []
+    for i in range(len(dataset) - look_back - 1):
+        a = dataset[i:(i + look_back), 0]
+        dataX.append(a)
+        dataY.append(dataset[i + look_back, 0])
+    return np.array(dataX), np.array(dataY)
+
+
+# --------------------- Data Preprocessing --------------------#
+total_dataset = pd.read_csv("data.csv")
+data_set_1 = total_dataset.iloc[:, 1:2].values # feature 1
+data_set_2 = total_dataset.iloc[:, 2:3].values # feature 2
+data_set = np.column_stack((data_set_1, data_set_2))
+
+# Feature scaling
+sc = MinMaxScaler(feature_range=(0, 1))
+data_set_scaled = sc.fit_transform(data_set)
+
+# split into train and test sets
+train_size = int(len(data_set_scaled) * 0.67)
+test_size = len(data_set_scaled) - train_size
+
+train_set = data_set_scaled[0:train_size, :]
+test_set = data_set_scaled[train_size:len(data_set_scaled), :]
+# reshape into X=t and Y=t+1
+look_back = 5
+#x_train, y_train = create_dataset(train_set, look_back)
+#x_test, y_test = create_dataset(test_set, look_back)
+
+# Instead of phrasing the past observations as separate input features, we can use them as time steps of the one
+# input feature, which is indeed a more accurate take prior time steps in our time series as inputs to predict the
+# output at the next time step.
+# [samples, time_steps, features]
+# samples are the number of data, or say how many rows are there in your data set
+# time step is the number of times to feed in the model or LSTM
+# features is the number of columns of each sample OR [Pressure,Temperature] OR sequence input and a sequence output
+# Many-to-Many (Encoder-Decoder Model) Sequence Problems with Single or multiple Features
+# X = np.array(X).reshape(20, 3, 2) -- multiple Features(Many-to-Many)
+# Y = np.array(Y).reshape(20, 3, 1)-- multiple Features(Many-to-Many)
+# X = np.array(X).reshape(20, 3, 1) -- one Feature(Many-to-Many)
+# Y = np.array(Y).reshape(20, 3, 1) -- one Feature(Many-to-Many)
+# if we want one time-step (in fact we have multiple features) with two features then the dense=2 (one to many with multiple features) - y=[a,b]
+# if we want multiple time-steps with two features then the dense=1 (many to many with multiple features)
+# if we want one time-step with two features then the dense =1 (many to one with one feature)
+
+x_train = np.array(train_set).reshape(134, 5, 2)
+x_test = np.array(x_test).reshape(x_test.shape[0], x_test.shape[1], 2)
+# x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
+# x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 2))
+
+# --------------------- Building RNN/LSTM model --------------------#
+# if you have 1000 training examples, and your batch size is 500, then it will take 2 iterations to complete 1 epoch. #
+# create and fit the LSTM network
+model = Sequential()
+# model.add(Bidirectional(LSTM(50, activation='relu'), input_shape=(3, 1)))
+model.add(LSTM(32, input_shape=(look_back, 1)))
+model.add(Dense(units=1))
+model.compile(loss='mean_squared_error', optimizer='adam')
+print(model.summary())
+model.fit(x_train, y_train, epochs=100, batch_size=1, verbose=1)
+"""
+# Adding the first LSTM layer--Stacked LSTM
+model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+model.add(Dropout(0.2))
+
+# Adding the second LSTM layer--return_sequence means neuron is used as an input to the next LSTM layer.
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0.2))
+
+# Adding the third LSTM layer
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0.2))
+
+# Adding the forth LSTM layer
+## model.add(LSTM(units=32, return_sequences=True))
+## model.add(Dropout(0.2))
+
+# Adding the fifth LSTM layer
+# note that this is the final LSTM layer, hence we change the binary argument to False
+model.add(LSTM(units=50))
+model.add(Dropout(0.2))
+
+# Adding output layer to the RNN to make a fully connected NN
+model.add(Dense(units=1))
+
+# --------------------- Compiling the RNN model --------------------#
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# --------------------- Training RNN model --------------------#
+# connecting the built model to the training model
+model.fit(x_train, y_train, epochs=250, batch_size=1, verbose=2)
+"""
+# obtaining predicted values
+predicted_price_train = model.predict(x_train)
+predicted_price_test = model.predict(x_test)
+
+predicted_price_train = sc.inverse_transform(predicted_price_train)
+y_train = sc.inverse_transform([y_train])
+predicted_price_test = sc.inverse_transform(predicted_price_test)
+y_test = sc.inverse_transform([y_test])
+# --------------------- Visualizing the LTSM model results--------------------#
+# calculate root mean squared error
+
+trainScore = math.sqrt(mean_squared_error(y_train[0], predicted_price_train[:, 0]))
+print('Train Score: %.2f RMSE' % trainScore)
+testScore = math.sqrt(mean_squared_error(y_test[0], predicted_price_test[:, 0]))
+print('Test Score: %.2f RMSE' % testScore)
+
+# shift train predictions for plotting
+trainPredictPlot = np.empty_like(data_set_scaled)
+trainPredictPlot[:, :] = np.nan
+trainPredictPlot[look_back:len(predicted_price_train) + look_back, :] = predicted_price_train
+# shift test predictions for plotting
+testPredictPlot = np.empty_like(data_set_scaled)
+testPredictPlot[:, :] = np.nan
+testPredictPlot[len(predicted_price_train) + (look_back * 2) + 1:len(data_set_scaled) - 1, :] = predicted_price_test
+# plot baseline and predictions
+plt.plot(sc.inverse_transform(data_set_scaled), label="Real Dataset", color='blue')
+plt.plot(trainPredictPlot, label="predicted train set", color='green')
+plt.plot(testPredictPlot, label="predicted test set", color='red')
+plt.legend(loc='upper left')
+plt.show()
+print(time.process_time() - start_time)
+output_y = y_test[0]
+print(output_y)
+print("..........................")
+output_predict = predicted_price_test[:, 0]
+print(output_predict)
