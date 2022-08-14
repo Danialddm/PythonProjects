@@ -4,13 +4,12 @@ from json import dumps
 from flask_jsonpify import jsonify
 import pyodbc
 
-
 # DB connection
 server = '10.192.63.52\DWH01,49149'#'172.31.3.245'# 
 database = 'WebSiteDB'#'OKDynAXTest'# 
 username = 'websiteuser'#'lotteryuser'# 
 password = 'B$tor$4416#Bos'#'123'# 
-cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cnxn = pyodbc.connect(r'DRIVER={ODBC Driver 17 for SQL Server};SERVER=10.192.63.52\DWH01,49149;DATABASE=WebSiteDB;UID=websiteuser;PWD=B$tor$4416#Bos')
 cursor = cnxn.cursor()
 results = []
 
@@ -24,7 +23,7 @@ headers = {
 }
 
 
-@app.route('/api/v1/get_itemid', methods = ['GET'])
+@app.route('/invent/get_itemid', methods = ['GET'])
 def get_itemid():
     try:
         itemid = request.args.getlist('itemid', type = str)
@@ -43,7 +42,7 @@ def get_itemid():
     except:
         return jsonify({'error' : 'bad request', 'success' : 'false'}) , 400
 
-@app.route('/api/v1/get_batch', methods = ['GET'])
+@app.route('/invent/get_batch', methods = ['GET'])
 def get_batch():
     try:
         num = int(request.args.get('num'))
@@ -62,7 +61,7 @@ def get_batch():
     except:
         return jsonify({'error' : 'bad request', 'success' : 'false'}) , 400
 
-@app.route('/api/v1/get_storeid', methods = ['GET'])
+@app.route('/invent/get_storeid', methods = ['GET'])
 def get_storeid():
     try:
         storeid = request.args.get('storeid', type = str)
@@ -80,7 +79,7 @@ def get_storeid():
     except:
         return jsonify({'error' : 'bad request', 'success' : 'false'}) , 400
 
-@app.route('/api/v1/get_Allitemid', methods = ['GET'])
+@app.route('/invent/get_allitemid', methods = ['GET'])
 def get_Allitemid():
     try:
         headers = request.headers
@@ -98,6 +97,6 @@ def get_Allitemid():
         return jsonify({'error' : 'bad request', 'success' : 'false'}) , 400
 
 if __name__ == '__main__':
-     app.run(host='127.0.0.1', port='5002')
-     #app.run(host = 'danialddm.pythonanywhere.com')
+     #app.run(host='127.0.0.1', port='5002')
+     app.run(host='0.0.0.0',port=9010)
 
